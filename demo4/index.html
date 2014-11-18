@@ -15,17 +15,18 @@
 
 	<form role="form" name="createUserForm" ng-submit="createUser(user)" novalidate>
         <br>
-        
+
         <div class="form-group">
             <label for="first_name">First Name</label>
             <input type="text" class="form-control" id="first_name" ng-model="user.first_name" required>
         </div>
-        
+
         <div class="form-group">
             <label for="last_name">Last Name</label>
             <input type="text" class="form-control" id="last_name" ng-model="user.last_name" required>
         </div>
 
+        <!-- this submit ng-disabled can disable if the required attributes from first and last name are not met and only let you submit if they do it.  -->
         <button type="submit" class="btn btn-primary" ng-disabled="createUserForm.$invalid">Submit</button>
     </form>
 </div>

@@ -5,9 +5,27 @@
 <title>Angular Exercise 5</title>
 <script src="bower_components/angular/angular.js"></script>
 </head>
-<body>
+<body ng-app="title">
+
+<div class="container" ng-controller="titleCtrl">
+
+  <h5> Titles </h5>
+  <ul>
+      <li ng-repeat="title in titles">{{ title.name }} </li>
+  </ul>
+
+  <h5> Skills </h5>
+
+   <ul>
+      <li ng-repeat="skill in skills">{{ skill.name }} </li>
+  </ul>
+</div>
 
 <p>Create a list of titles using data from the API</p>
 
+
+
+
+<script src="app.js"></script>
 </body>
 </html>

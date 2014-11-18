@@ -5,7 +5,42 @@
 <title>Angular Exercise 3</title>
 <script src="bower_components/angular/angular.js"></script>
 </head>
-<body>
+<body ng-app="Demo">
+
+<div class="containter" ng-controller="CartCtrl">
+  <div class="form-group">
+      <input type="text" ng-model="search"placeholder="Search">
+      <!-- ng-model="search.name" -->
+  </div>
+
+  <ul >
+    <li ng-repeat="CartItem in CartItems | filter:search">
+    {{CartItem.name}} is {{CartItem.price | currency}} per unit, {{CartItem.quantity}} of these would be {{CartItem.price * CartItem.quantity | currency}}</li>
+  </ul>
+<!-- </div> -->
+
+<!-- <div class="containter" ng-controller="addCtrl"> -->
+<form role='form' name='createCartItemForm' ng-submit='CreateCartItem(CartItem)'>
+<label for="name">Item Name</label>
+<input type='text' ng-model="CartItem.name" required><br>
+
+<label for="price">Price</label>
+<input type="number" ng-model="CartItem.price" required><br>
+
+<label for="quantity">Quantitiy</label>
+<input type="number" ng-model="CartItem.quantity" required> <br>
+
+<button type="submit" ng-disabled="createCartItemForm.$invalid">Submit</button>
+</form>
+
+
+
+</div>
+
+
+
+
+
 
 <ol>
 	<li>Create a shopping cart structure in your controller and then list the items using ng-repeat so they match the format below. Hint: there's a filter in angular to help with currencies!</li>
@@ -15,6 +50,6 @@
 <ul>
 	<li>4 items with the name apple will cost $2.50</li>
 </ul>
-
+<script src="app.js"></script>
 </body>
 </html>

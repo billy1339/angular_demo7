@@ -5,9 +5,21 @@
 <title>Angular Exercise 1</title>
 <script src="bower_components/angular/angular.js"></script>
 </head>
-<body>
+<body ng-app="Demo">
 
+<div ng-controller="mathCtrl">
+  <h1>Math Calculator to Add</h1>
+
+
+  <!-- <h1> the addor is {{math.calc}}</h1> -->
+  <p> {{num1}}, {{num2}}</p>
+  <p><input type='number' ng-model="num1"> </p>
+  <p><input type='number' ng-model="num2"> </p>
+  <!-- <p><input type='text' ng-model="math.calc"> </p> -->
+   <h1>The answer is {{answer}}</h1>
+</div>
 <p>Create a simple calulator that allows you to add two numbers (hint you may need to use number inputs)</p>
 
+<script src="app.js"></script>
 </body>
 </html>

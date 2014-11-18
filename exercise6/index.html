@@ -5,9 +5,33 @@
 <title>Angular Exercise 6</title>
 <script src="bower_components/angular/angular.js"></script>
 </head>
-<body>
+<body ng-app="title">
+
+<div class="container" ng-controller="titleCtrl">
+
+  <h5> Titles </h5>
+  <ul>
+      <li ng-repeat="title in titles">{{ title.name }} <a  href="#" ng-click="deleteTitle(title)">Delete</a> <a href="#" ng-click="updateTitle(title)">Update</a> </li>
+  </ul>
+
+  <!-- <h1>{{make()}}</h1> -->
+
+
+  <form role='form' name='createTitleForm' ng-submit='createTitle(title)'>
+  <label for="name">Title Name</label>
+  <input type='text' ng-model="title.name" required><br>
+
+  <button type="submit" ng-disabled="createTitleForm.$invalid">Submit</button>
+  </form>
+
+
+
+
+
+</div>
 
 <p>Add in create, update, and destroy functionality for skills</p>
 
+<script src="app.js"></script>
 </body>
 </html>
