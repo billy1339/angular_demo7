@@ -4,9 +4,10 @@ angular.module('Demo', [
 ]);
 
 
-// angular.module('Demo').run(function(TitleFactory) {
-//     TitleFactory.fetch();
-// });
+angular.module('Demo').run(function(TitleFactory, UserFactory) {
+    TitleFactory.fetch();
+    UserFactory.fetch();
+});
 
 angular.module('Demo').config(function($routeProvider) {
     'use strict';
@@ -40,12 +41,13 @@ angular.module('Demo').controller('NavbarCtrl', function($scope, $location) {
     };
 });
 
-angular.module('Demo').controller('TitlesCtrl', function($scope, $http) {
+angular.module('Demo').controller('TitlesCtrl', function($scope, $http, TitleFactory) {
     'use strict';
 
-    $http.get('http://localhost:3000/titles').success(function(response) {
-        $scope.titles = response;
-    });
+    // $http.get('http://localhost:3000/titles').success(function(response) {
+    //     $scope.titles = response;
+    // });
+    $scope.titles = TitleFactory.titles;
 
     $scope.upsertTitle = function(title) {
 
@@ -72,22 +74,29 @@ angular.module('Demo').controller('TitlesCtrl', function($scope, $http) {
     };
 });
 
-angular.module('Demo').controller('UsersCtrl', function($scope, $http) {
+angular.module('Demo').controller('UsersCtrl', function($scope, $http, TitleFactory, UserFactory) {
     'use strict';
 
-    $http.get('http://localhost:3000/users').success(function(response) {
-        $scope.users = response;
-    });
 
-    // $scope.title = TitleFactory.titles;
+    $scope.users = UserFactory.users;
+    $scope.titles = TitleFactory.titles;
 
     $scope.upsertUser = function(user) {
 
+        var params = {user: user};
+        // console.log(params)
+
         if (user.id) {
-            $http.put('http://localhost:3000/users/' + user.id, {user: {first_name: user.first_name, last_name: user.last_name}});
-        } else {
-            $http.post('http://localhost:3000/users', {user: user}).success(function(response) {
-                $scope.users.push(response);
+            $http.put('http://localhost:3000/users/' + user.id, params).success(function(response) {   //{user: {first_name: user.first_name, last_name: user.last_name}})
+                UserFactory.fetch();
+                console.log(params);
+            });
+            } else {
+            $http.post('http://localhost:3000/users', params).success(function(response) {
+                // $scope.users.push(response);
+                UserFactory.fetch();
+                console.log(response);
+
             });
         }
 
@@ -106,22 +115,39 @@ angular.module('Demo').controller('UsersCtrl', function($scope, $http) {
     };
 });
 
-// angular.module('Demo').factory('TitleFactory', function($scope, $http) {
-//     'use strict';
+angular.module('Demo').factory('TitleFactory', function($http) {
+    var titles = [];
 
-//     var titles = [];
+    var fetch = function() {
+        $http.get('http://localhost:3000/titles').success(function(response) {
+            // use angular.copy() to retain the original array which the controllers are bound to
+            // tasks = response will overwrite the array with a new one and the controllers loose the reference
+            // could also do tasks.length = 0, then push in the new items
+            angular.copy(response, titles);
+        });
+    };
 
-//     var fetch = function() {
-//         $http.get('http://localhost:3000/titles').success(function(response) {
-//             $scope.titles = response
-//             angular.copy(response, titles);
-//         });
-//     };
+    return {
+        titles: titles,
+        fetch: fetch
+    };
+});
 
-//     return {
-//         titles: titles,
-//         fetch: fetch
-//     };
 
-// });
+angular.module('Demo').factory('UserFactory', function($http) {
+    var users = [];
 
+    var fetch = function() {
+        $http.get('http://localhost:3000/users').success(function(response) {
+            // use angular.copy() to retain the original array which the controllers are bound to
+            // tasks = response will overwrite the array with a new one and the controllers loose the reference
+            // could also do tasks.length = 0, then push in the new items
+            angular.copy(response, users);
+        });
+    };
+
+    return {
+        users: users,
+        fetch: fetch
+    };
+});

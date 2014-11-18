@@ -18,9 +18,9 @@
       </thread>
       <body>
         <tr ng-repeat="user in users">
-          <td> {{ ::user.first_name}}</td>
-          <td> {{ ::user.last_name}} </td>
-          <td> {{ ::user.title.name}} </td>
+          <td> {{ user.first_name}}</td>
+          <td> {{ user.last_name}} </td>
+          <td> {{ user.title.name}} </td>
           <td><a ng-click="editUser(user)">Edit</a> | <a ng-click="deleteUser(user)">Delete</a></td>
         </tr>
       </body>
