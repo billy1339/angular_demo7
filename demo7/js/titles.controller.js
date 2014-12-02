@@ -2,9 +2,6 @@
 angular.module('Demo').controller('TitlesCtrl', function($scope, $http, TitleFactory) {
     'use strict';
 
-    // $http.get('http://localhost:3000/titles').success(function(response) {
-    //     $scope.titles = response;
-    // });
     $scope.titles = TitleFactory.titles;
 
     $scope.upsertTitle = function(title) {

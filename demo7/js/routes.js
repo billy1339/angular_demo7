@@ -17,7 +17,16 @@ angular.module('Demo').config(function($routeProvider) {
         .when('/titles', {
             templateUrl: 'templates/titles.html'
         })
+        .when('/login', {
+            templateUrl: 'templates/login.html',
+            controller: 'LoginCtrl'
+        })
+        .when('/createUser', {
+            templateUrl: 'templates/createUser.html',
+            controller: 'createUserCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
+
 });

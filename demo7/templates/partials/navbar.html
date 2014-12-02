@@ -16,7 +16,12 @@
                 <li ng-class="{ active: isActive('/contact')}"><a ng-href="#/contact">Contact</a></li>
                 <li ng-class="{ active: isActive('/users')}"><a ng-href="#/users">Users</a></li>
                 <li ng-class="{ active: isActive('/titles')}"><a ng-href="#/titles">Titles</a></li>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="isLoggedIn()"><a ng-click="logout()">Logout</a></li>
+                <li ng-if="!isLoggedIn()"><a ng-href="#/login">Login</a></li>
             </ul>
+
         </div>
     </div>
 </div>

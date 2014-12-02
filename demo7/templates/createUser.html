@@ -1,0 +1,34 @@
+<div class="container" ng-controller="createUserCtrl">
+
+    <form role="form" name="loginForm" ng-submit="createUser(credentials)" novalidate>
+        <h2 class="form-signin-heading">Create User</h2>
+
+        <br>
+
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="first_name" class="form-control" id="first_name" ng-model="credentials.first_name" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="last_name" class="form-control" id="last_name" ng-model="credentials.last_name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" ng-model="credentials.email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" ng-model="credentials.password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Confirm Password</label>
+            <input type="password" class="form-control" id="password" ng-model="credentials.password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Create</button>
+    </form>
+
+</div>
